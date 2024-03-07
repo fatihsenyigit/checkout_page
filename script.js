@@ -8,3 +8,19 @@ deleteAllBtn.addEventListener("click", ()=> {
     products.classList.add("no-product")
     document.querySelector('.delete-div').style.visibility = "hidden"
 })
+
+products.addEventListener ('click', (e)=> {
+
+    console.log(e.target)
+    
+    if(e.target.classList.contains('fa-plus')) {
+        e.target.previousElementSibling.textContent++
+        calculatePrice(e.target)
+    }
+})
+
+const calculatePrice = (btn) => {
+    const discountedPrice = btn.closest('.product-info').querySelector('#discounted-price')
+
+    console.log(discountedPrice.textContent)
+}
