@@ -22,5 +22,9 @@ products.addEventListener ('click', (e)=> {
 const calculatePrice = (btn) => {
     const discountedPrice = btn.closest('.product-info').querySelector('#discounted-price')
 
-    console.log(discountedPrice.textContent)
+    const productPrice = btn.closest('.buttons-div').querySelector('#product-price')
+
+    const quantity = btn.parentNode.querySelector('#quantity')
+
+    productPrice.textContent = (quantity.textContent * discountedPrice.textContent).toFixed(2)
 }
