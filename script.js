@@ -21,6 +21,8 @@ products.addEventListener ('click', (e)=> {
           e.target.nextElementSibling.textContent--;
           calculatePrice(e.target);
         }
+    } else if (e.target.classList.contains("fa-trash-can")) {
+        e.target.closest('.product').remove()
     }
 })
 
