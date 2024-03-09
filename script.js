@@ -13,7 +13,7 @@ const TAX_RATE = 0.18
 deleteAllBtn.addEventListener("click", ()=> {
     products.textContent = "No Product"
     products.classList.add("no-product")
-    document.querySelector('.delete-div').remove()
+    document.querySelector('.delete-div').style.visibility = "hidden"
     calculateTotalPrice()
 })
 
@@ -53,10 +53,18 @@ const calculateTotalPrice = () => {
 
     const shippingPrice = total >= FREE_SHIPPING_LIMIT || total === 0 ? 0.00 :SHIPPING_PRICE
 
+    const taxPrice = total * TAX_RATE
+
+    const sum = total + taxPrice + shippingPrice
+
     const selectedPrice = document.querySelector('#selected-price')
     selectedPrice.textContent = total.toFixed(2)
 
     document.getElementById('shipping').textContent = shippingPrice.toFixed(2)
+    
+    document.getElementById('tax').textContent = taxPrice.toFixed(2)
+    
+    document.getElementById('total').textContent = sum.toFixed(2)
 }
 
 window.addEventListener ('load', () => {
