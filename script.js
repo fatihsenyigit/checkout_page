@@ -10,8 +10,6 @@ deleteAllBtn.addEventListener("click", ()=> {
 })
 
 products.addEventListener ('click', (e)=> {
-
-    console.log(e.target)
     
     if(e.target.classList.contains('fa-plus')) {
         e.target.previousElementSibling.textContent++
@@ -22,7 +20,8 @@ products.addEventListener ('click', (e)=> {
           calculatePrice(e.target);
         }
     } else if (e.target.classList.contains("fa-trash-can")) {
-        e.target.closest('.product').remove()
+        e.target.closest('.product').remove();
+        calculatePrice(e.target);
     }
 })
 
@@ -34,4 +33,16 @@ const calculatePrice = (btn) => {
     const quantity = btn.parentNode.querySelector('#quantity')
 
     productPrice.textContent = (quantity.textContent * discountedPrice.textContent).toFixed(2)
+
+    calculateTotalPrice()
+}
+
+const calculateTotalPrice = () => {
+    const prices = document.querySelectorAll('#product-price')
+    const total = [...prices].reduce(
+        (a,b) => a + Number(b.textContent), 0
+    )
+
+    const selectedPrice = document.querySelector('#selected-price')
+    selectedPrice.textContent = total.toFixed(2)
 }
