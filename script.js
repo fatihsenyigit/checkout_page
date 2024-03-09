@@ -2,11 +2,19 @@
 const  deleteAllBtn = document.querySelector (".delete-div .fa-trash-can")
 const products = document.querySelector("article.products")
 
+
+//constants
+const FREE_SHIPPING_LIMIT = 3000
+const SHIPPING_PRICE = 25.99
+const TAX_RATE = 0.18
+
+
 // event handlers
 deleteAllBtn.addEventListener("click", ()=> {
     products.textContent = "No Product"
     products.classList.add("no-product")
-    document.querySelector('.delete-div').style.visibility = "hidden"
+    document.querySelector('.delete-div').remove()
+    calculateTotalPrice()
 })
 
 products.addEventListener ('click', (e)=> {
@@ -43,6 +51,14 @@ const calculateTotalPrice = () => {
         (a,b) => a + Number(b.textContent), 0
     )
 
+    const shippingPrice = total >= FREE_SHIPPING_LIMIT || total === 0 ? 0.00 :SHIPPING_PRICE
+
     const selectedPrice = document.querySelector('#selected-price')
     selectedPrice.textContent = total.toFixed(2)
+
+    document.getElementById('shipping').textContent = shippingPrice.toFixed(2)
 }
+
+window.addEventListener ('load', () => {
+    calculateTotalPrice()
+})
